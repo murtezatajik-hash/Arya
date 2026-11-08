@@ -3,6 +3,18 @@
     "title": "Arya: My Ledger",
     "description": "A quiet personal ledger for recording income and expenses — simple, private, no payments."
   },
+  "pwa": {
+    "installGuide": {
+      "title": "Install Arya",
+      "body": "To install Arya: on Android, open the browser menu > Add to Home screen; on iPhone, tap Share > Add to Home Screen.",
+      "dismiss": "Dismiss install guide"
+    },
+    "offline": {
+      "title": "You're offline",
+      "description": "There is no internet connection. Open the page again when you're back online.",
+      "back": "Back to ledgers"
+    }
+  },
   "brand": {
     "name": "Arya",
     "tagline": "My ledger"

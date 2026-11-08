@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/Button";
 import { LedgerCard } from "@/components/ledgers/LedgerCard";
 import { LedgerCreateForm } from "@/components/ledgers/LedgerCreateForm";
+import { InstallGuide } from "@/components/pwa/InstallGuide";
 import { useRouter } from "@/i18n/navigation";
 import type { Ledger } from "@/lib/ledgers/constants";
 
@@ -35,6 +36,8 @@ export function LedgersView({ ownerId, ledgers }: LedgersViewProps) {
           {t("subtitle")}
         </p>
       </header>
+
+      <InstallGuide />
 
       <div className="mt-6">
         {creating ? (
