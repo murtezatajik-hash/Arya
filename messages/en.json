@@ -1,0 +1,300 @@
+{
+  "metadata": {
+    "title": "Arya: My Ledger",
+    "description": "A quiet personal ledger for recording income and expenses — simple, private, no payments."
+  },
+  "brand": {
+    "name": "Arya",
+    "tagline": "My ledger"
+  },
+  "common": {
+    "loading": "Please wait…",
+    "language": "Language",
+    "locales": {
+      "fa": "فارسی",
+      "en": "English"
+    },
+    "email": "Email",
+    "emailPlaceholder": "name@example.com",
+    "password": "Password",
+    "passwordPlaceholder": "••••••••",
+    "passwordHint": "At least 6 characters",
+    "confirmPassword": "Confirm password"
+  },
+  "auth": {
+    "login": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to open your personal ledger.",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "New here?",
+      "registerLink": "Create an account"
+    },
+    "register": {
+      "title": "Create your account",
+      "subtitle": "Set up your personal ledger in a few seconds.",
+      "submit": "Create account",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Sign in"
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter the email on your account and we'll send you a recovery link.",
+      "submit": "Send recovery link",
+      "backToLogin": "Back to sign in"
+    },
+    "resetPassword": {
+      "title": "Choose a new password",
+      "subtitle": "Pick a fresh, secure password for your account.",
+      "submit": "Save new password",
+      "invalidTitle": "This recovery link isn't valid",
+      "invalidDescription": "It has expired or was already used. Request a new one.",
+      "requestNewLink": "Request a new link",
+      "goToLedgers": "Go to ledgers"
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "invalidCredentials": "Email or password is incorrect.",
+      "emailNotConfirmed": "Confirm your email before signing in.",
+      "emailAlreadyRegistered": "An account already exists for this email.",
+      "weakPassword": "That password is too weak. Use at least 6 characters and a secure combination.",
+      "passwordMismatch": "The passwords don't match.",
+      "rateLimited": "Too many requests. Please wait a moment and try again.",
+      "samePassword": "The new password must be different from the current one.",
+      "sessionExpired": "Your link has expired. Please request a new recovery email.",
+      "callback": "We couldn't verify your account. Sign in again or reopen the link."
+    },
+    "messages": {
+      "confirmationSent": "Your account is created. Open the confirmation link in your email to activate it.",
+      "resetSent": "If an account exists for this email, a recovery link has been sent.",
+      "passwordUpdated": "Your password has been updated.",
+      "checkSpam": "If you don't see the email, check your spam folder too."
+    }
+  },
+  "dashboard": {
+    "eyebrow": "Personal space",
+    "title": "Dashboard",
+    "subtitle": "Your ledger and account, in one calm place.",
+    "emailLabel": "Account",
+    "unknownEmail": "No email",
+    "signOut": "Sign out",
+    "emptyTitle": "Your ledger is ready",
+    "emptyDescription": "Recording income and expenses will arrive here soon.",
+    "comingSoon": "Coming soon"
+  },
+  "ledgers": {
+    "eyebrow": "Dashboard",
+    "title": "Ledgers",
+    "subtitle": "View your personal ledgers, rename them, or create a new one.",
+    "newLedger": "New ledger",
+    "form": {
+      "title": "New ledger",
+      "nameLabel": "Ledger name",
+      "namePlaceholder": "e.g. Home ledger",
+      "currencyLabel": "Currency",
+      "submit": "Create ledger",
+      "cancel": "Cancel"
+    },
+    "currencies": {
+      "TJS": "Tajikistani somoni",
+      "IRR": "Iranian rial",
+      "AFN": "Afghan afghani",
+      "RUB": "Russian ruble",
+      "USD": "US dollar",
+      "EUR": "Euro"
+    },
+    "card": {
+      "open": "Open ledger",
+      "rename": "Rename",
+      "delete": "Delete ledger"
+    },
+    "actions": {
+      "save": "Save name",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "upgrade": "Upgrade"
+    },
+    "delete": {
+      "question": "Are you sure?",
+      "description": "This ledger will be permanently deleted."
+    },
+    "empty": {
+      "title": "No ledgers yet",
+      "description": "Create your first ledger to get started."
+    },
+    "detail": {
+      "back": "All ledgers",
+      "comingSoon": "Coming soon",
+      "eyebrow": "Ledger",
+      "defaultCurrency": "Default currency"
+    },
+    "errors": {
+      "generic": "Something went wrong. Please try again.",
+      "load": "We couldn't load your ledgers.",
+      "retry": "Try again",
+      "limitReached": "On the free plan, you can only have one ledger.",
+      "nameRequired": "Enter a ledger name."
+    },
+    "tabs": {
+      "label": "Ledger sections",
+      "records": "Records",
+      "contacts": "Contacts",
+      "summary": "Summary"
+    },
+    "balanceBar": {
+      "label": "Balance",
+      "empty": "No records yet",
+      "ariaLabel": "Total ledger balance by currency"
+    },
+    "openingBalances": {
+      "title": "Opening balance",
+      "hint": "Enter a starting amount for each currency; amounts can be zero or negative.",
+      "save": "Save opening balances",
+      "errors": {
+        "amountInvalid": "That amount is not valid.",
+        "amountNoFraction": "This currency doesn't allow decimal places.",
+        "amountTooManyFractions": "This currency allows at most two decimal places.",
+        "generic": "We couldn't save the opening balances. Please try again."
+      }
+    },
+    "kinds": {
+      "received": "Received",
+      "paid": "Paid",
+      "lent": "Lent",
+      "borrowed": "Borrowed"
+    },
+    "common": {
+      "filters": "Filters",
+      "clearFilters": "Clear filters",
+      "month": "Month",
+      "allMonths": "All months",
+      "year": "Year",
+      "allYears": "All years",
+      "kind": "Type",
+      "allKinds": "All types",
+      "contact": "Contact",
+      "allContacts": "All contacts",
+      "noContact": "No contact",
+      "cancel": "Cancel",
+      "delete": "Delete"
+    },
+    "records": {
+      "title": "Records",
+      "subtitle": "View and manage this ledger's income, payments, and loans.",
+      "new": "New record",
+      "emptyTitle": "No records yet",
+      "emptyDescription": "Add your first received, paid, lent, or borrowed record.",
+      "noResultsTitle": "No matching records",
+      "noResultsDescription": "Change the filters or search terms.",
+      "searchLabel": "Search descriptions",
+      "searchPlaceholder": "Search record descriptions"
+    },
+    "transactionForm": {
+      "createTitle": "New record",
+      "editTitle": "Edit record",
+      "kindLabel": "Type",
+      "amountLabel": "Amount",
+      "amountPlaceholder": "e.g. 12.50",
+      "currencyLabel": "Currency",
+      "dateLabel": "Date",
+      "contactLabel": "Contact",
+      "contactNone": "No contact",
+      "contactNew": "New contact",
+      "newContactNameLabel": "New contact name",
+      "newContactNamePlaceholder": "Enter the contact's name",
+      "descriptionLabel": "Description",
+      "descriptionPlaceholder": "Optional description",
+      "save": "Save record",
+      "errors": {
+        "amountRequired": "Enter an amount.",
+        "amountInvalid": "That amount is not valid.",
+        "amountPositive": "The amount must be greater than zero.",
+        "amountNoFraction": "This currency doesn't allow decimal places.",
+        "amountTooManyFractions": "This currency allows at most two decimal places.",
+        "dateInvalid": "That date is not valid.",
+        "contactNameRequired": "Enter the new contact's name.",
+        "contactCreate": "We couldn't create the contact. Please try again.",
+        "generic": "We couldn't save the record. Please try again."
+      }
+    },
+    "transactionList": {
+      "edit": "Edit record",
+      "delete": "Delete record",
+      "deleteQuestion": "Are you sure?",
+      "deleteDescription": "This record will be permanently deleted.",
+      "deleteError": "We couldn't delete the record. Please try again."
+    },
+    "contacts": {
+      "title": "Contacts",
+      "subtitle": "Manage the people you exchange money with. Each contact's balance is tracked separately per currency.",
+      "new": "New contact",
+      "emptyTitle": "No contacts yet",
+      "emptyDescription": "Add people you receive from, pay, or exchange loans with.",
+      "balance": "Balance",
+      "view": "View {name}'s account",
+      "edit": "Edit contact",
+      "delete": "Delete contact",
+      "deleteQuestion": "Are you sure?",
+      "deleteDescription": "The contact will be deleted, but their records will remain.",
+      "deleteError": "We couldn't delete the contact. Please try again."
+    },
+    "contactForm": {
+      "createTitle": "New contact",
+      "editTitle": "Edit contact",
+      "nameLabel": "Name",
+      "namePlaceholder": "Contact name",
+      "phoneLabel": "Phone (optional)",
+      "phonePlaceholder": "e.g. +992...",
+      "noteLabel": "Note (optional)",
+      "notePlaceholder": "Optional note",
+      "save": "Save contact",
+      "errors": {
+        "nameRequired": "Enter the contact's name.",
+        "generic": "We couldn't save the contact. Please try again."
+      }
+    },
+    "summary": {
+      "title": "Summary",
+      "subtitle": "Opening balance, ledger balance, contact receivables and payables, and income and payments, separated by currency.",
+      "emptyTitle": "Nothing to summarize yet",
+      "emptyDescription": "Once you add a record or a contact, the summary will appear here.",
+      "currentMonth": "Current month",
+      "received": "Received",
+      "paid": "Paid",
+      "currentYear": "Current year",
+      "currencyBalances": "Balances by currency",
+      "currencyBalancesHint": "Balance comes from the opening balance and all ledger records; receivables and payables come only from contact balances.",
+      "opening": "Opening balance",
+      "balance": "Balance",
+      "receivable": "Receivable (from contacts)",
+      "payable": "Payable (to contacts)"
+    },
+    "contactDetail": {
+      "back": "All contacts",
+      "eyebrow": "Contact",
+      "phone": "Phone",
+      "note": "Note",
+      "balance": "Balance",
+      "history": "Record history",
+      "emptyHistoryTitle": "No records yet",
+      "emptyHistoryDescription": "No received, paid, lent, or borrowed records for this contact yet."
+    },
+    "balance": {
+      "receivable": "Owes me",
+      "payable": "I owe",
+      "zero": "No balance"
+    },
+    "workspace": {
+      "loadError": "We couldn't load this ledger's data."
+    }
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found",
+    "description": "This address doesn't exist or has moved.",
+    "backHome": "Back home"
+  },
+  "footer": {
+    "note": "A personal ledger for recording only — no payments."
+  }
+}

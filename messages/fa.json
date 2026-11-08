@@ -1,0 +1,300 @@
+{
+  "metadata": {
+    "title": "آریا: دفتر حساب من",
+    "description": "دفتر حساب شخصی برای ثبت درآمد و هزینه؛ ساده، خصوصی و بدون پرداخت."
+  },
+  "brand": {
+    "name": "آریا",
+    "tagline": "دفتر حساب من"
+  },
+  "common": {
+    "loading": "لطفاً صبر کنید…",
+    "language": "زبان",
+    "locales": {
+      "fa": "فارسی",
+      "en": "English"
+    },
+    "email": "ایمیل",
+    "emailPlaceholder": "name@example.com",
+    "password": "رمز عبور",
+    "passwordPlaceholder": "••••••••",
+    "passwordHint": "حداقل ۶ کاراکتر",
+    "confirmPassword": "تکرار رمز عبور"
+  },
+  "auth": {
+    "login": {
+      "title": "خوش آمدید",
+      "subtitle": "برای دیدن دفتر حساب شخصی خود وارد شوید.",
+      "submit": "ورود به حساب",
+      "forgotPassword": "رمز عبور را فراموش کرده‌اید؟",
+      "noAccount": "هنوز حساب ندارید؟",
+      "registerLink": "ساخت حساب جدید"
+    },
+    "register": {
+      "title": "ساخت حساب",
+      "subtitle": "در چند ثانیه دفتر حساب شخصی خود را بسازید.",
+      "submit": "ساخت حساب",
+      "hasAccount": "قبلاً حساب ساخته‌اید؟",
+      "loginLink": "وارد شوید"
+    },
+    "forgotPassword": {
+      "title": "فراموشی رمز",
+      "subtitle": "ایمیل حسابتان را وارد کنید تا پیوند بازیابی رمز برایتان ارسال شود.",
+      "submit": "ارسال پیوند بازیابی",
+      "backToLogin": "بازگشت به ورود"
+    },
+    "resetPassword": {
+      "title": "تعیین رمز جدید",
+      "subtitle": "یک رمز تازه و امن برای حساب خود انتخاب کنید.",
+      "submit": "ذخیره رمز جدید",
+      "invalidTitle": "پیوند بازیابی معتبر نیست",
+      "invalidDescription": "این پیوند منقضی شده یا قبلاً استفاده شده است. دوباره درخواست بازیابی بفرستید.",
+      "requestNewLink": "درخواست پیوند جدید",
+      "goToLedgers": "رفتن به دفترها"
+    },
+    "errors": {
+      "generic": "مشکلی پیش آمد. دوباره تلاش کنید.",
+      "invalidCredentials": "ایمیل یا رمز عبور درست نیست.",
+      "emailNotConfirmed": "پیش از ورود، ایمیل خود را تأیید کنید.",
+      "emailAlreadyRegistered": "برای این ایمیل قبلاً حساب ساخته شده است.",
+      "weakPassword": "رمز عبور ضعیف است؛ حداقل ۶ کاراکتر و ترکیبی امن انتخاب کنید.",
+      "passwordMismatch": "تکرار رمز عبور با رمز عبور یکسان نیست.",
+      "rateLimited": "درخواست‌های زیادی فرستاده شده است. کمی بعد دوباره تلاش کنید.",
+      "samePassword": "رمز جدید باید با رمز فعلی متفاوت باشد.",
+      "sessionExpired": "پیوند شما منقضی شده است. دوباره درخواست بازیابی بفرستید.",
+      "callback": "تأیید حساب انجام نشد. دوباره وارد شوید یا پیوند را از نو باز کنید."
+    },
+    "messages": {
+      "confirmationSent": "حساب ساخته شد. برای فعال‌سازی، پیوند تأیید را در ایمیل خود باز کنید.",
+      "resetSent": "اگر حسابی با این ایمیل وجود داشته باشد، پیوند بازیابی برایتان ارسال شد.",
+      "passwordUpdated": "رمز عبور با موفقیت تغییر کرد.",
+      "checkSpam": "اگر ایمیل را نمی‌بینید، پوشهٔ هرزنامه را هم بررسی کنید."
+    }
+  },
+  "dashboard": {
+    "eyebrow": "فضای شخصی",
+    "title": "پیشخوان",
+    "subtitle": "دفتر و حساب شما، همه در یک جای آرام.",
+    "emailLabel": "حساب کاربری",
+    "unknownEmail": "بدون ایمیل",
+    "signOut": "خروج",
+    "emptyTitle": "دفتر شما آماده است",
+    "emptyDescription": "ثبت درآمد و هزینه به‌زودی به همین دفتر اضافه می‌شود.",
+    "comingSoon": "به‌زودی"
+  },
+  "ledgers": {
+    "eyebrow": "پیشخوان",
+    "title": "دفترها",
+    "subtitle": "دفترهای شخصی خود را ببینید، نامشان را تغییر دهید یا دفتر تازه بسازید.",
+    "newLedger": "دفتر تازه",
+    "form": {
+      "title": "دفتر تازه",
+      "nameLabel": "نام دفتر",
+      "namePlaceholder": "مثلاً دفتر خانه",
+      "currencyLabel": "ارز",
+      "submit": "ساخت دفتر",
+      "cancel": "انصراف"
+    },
+    "currencies": {
+      "TJS": "سامانی تاجیکستان",
+      "IRR": "ریال ایران",
+      "AFN": "افغانی",
+      "RUB": "روبل روسیه",
+      "USD": "دلار آمریکا",
+      "EUR": "یورو"
+    },
+    "card": {
+      "open": "باز کردن دفتر",
+      "rename": "تغییر نام",
+      "delete": "حذف دفتر"
+    },
+    "actions": {
+      "save": "ذخیره نام",
+      "cancel": "انصراف",
+      "delete": "حذف",
+      "upgrade": "ارتقا"
+    },
+    "delete": {
+      "question": "آیا مطمئن هستید؟",
+      "description": "این دفتر برای همیشه حذف می‌شود."
+    },
+    "empty": {
+      "title": "هنوز دفتری نساخته‌اید",
+      "description": "نخستین دفتر خود را بسازید تا کار را شروع کنید."
+    },
+    "detail": {
+      "back": "همه دفترها",
+      "comingSoon": "به‌زودی",
+      "eyebrow": "دفتر",
+      "defaultCurrency": "ارز پیش‌فرض"
+    },
+    "errors": {
+      "generic": "مشکلی پیش آمد. دوباره تلاش کنید.",
+      "load": "دفترها بارگذاری نشدند.",
+      "retry": "تلاش دوباره",
+      "limitReached": "در نسخه رایگان فقط یک دفتر می‌توانید داشته باشید",
+      "nameRequired": "نام دفتر را بنویسید."
+    },
+    "tabs": {
+      "label": "بخش‌های دفتر",
+      "records": "ثبت‌ها",
+      "contacts": "اشخاص",
+      "summary": "خلاصه"
+    },
+    "balanceBar": {
+      "label": "مانده",
+      "empty": "هنوز ثبتی ندارید",
+      "ariaLabel": "مانده کل دفتر به تفکیک ارز"
+    },
+    "openingBalances": {
+      "title": "موجودی آغازین",
+      "hint": "برای هر ارز مبلغ اولیه را وارد کنید؛ مبلغ می‌تواند صفر یا منفی باشد.",
+      "save": "ذخیره موجودی آغازین",
+      "errors": {
+        "amountInvalid": "مبلغ معتبر نیست.",
+        "amountNoFraction": "برای این ارز مبلغ باید بدون اعشار باشد.",
+        "amountTooManyFractions": "برای این ارز حداکثر دو رقم اعشار مجاز است.",
+        "generic": "موجودی آغازین ذخیره نشد. دوباره تلاش کنید."
+      }
+    },
+    "kinds": {
+      "received": "دریافت",
+      "paid": "پرداخت",
+      "lent": "قرض دادم",
+      "borrowed": "قرض گرفتم"
+    },
+    "common": {
+      "filters": "فیلترها",
+      "clearFilters": "پاک کردن فیلترها",
+      "month": "ماه",
+      "allMonths": "همه ماه‌ها",
+      "year": "سال",
+      "allYears": "همه سال‌ها",
+      "kind": "نوع",
+      "allKinds": "همه نوع‌ها",
+      "contact": "شخص",
+      "allContacts": "همه اشخاص",
+      "noContact": "بدون شخص",
+      "cancel": "انصراف",
+      "delete": "حذف"
+    },
+    "records": {
+      "title": "ثبت‌ها",
+      "subtitle": "دریافت‌ها، پرداخت‌ها و قرض‌های این دفتر را ببینید و مدیریت کنید.",
+      "new": "ثبت تازه",
+      "emptyTitle": "هنوز ثبتی ندارید",
+      "emptyDescription": "نخستین دریافت، پرداخت یا قرض خود را ثبت کنید.",
+      "noResultsTitle": "ثبتی پیدا نشد",
+      "noResultsDescription": "فیلترها یا عبارت جستجو را تغییر دهید.",
+      "searchLabel": "جستجو در توضیح",
+      "searchPlaceholder": "در توضیح ثبت‌ها جستجو کنید"
+    },
+    "transactionForm": {
+      "createTitle": "ثبت تازه",
+      "editTitle": "ویرایش ثبت",
+      "kindLabel": "نوع",
+      "amountLabel": "مبلغ",
+      "amountPlaceholder": "مثلاً ۱۲.۵۰",
+      "currencyLabel": "ارز",
+      "dateLabel": "تاریخ",
+      "contactLabel": "شخص",
+      "contactNone": "بدون شخص",
+      "contactNew": "شخص تازه",
+      "newContactNameLabel": "نام شخص تازه",
+      "newContactNamePlaceholder": "نام شخص را بنویسید",
+      "descriptionLabel": "توضیح",
+      "descriptionPlaceholder": "توضیح اختیاری",
+      "save": "ذخیره ثبت",
+      "errors": {
+        "amountRequired": "مبلغ را بنویسید.",
+        "amountInvalid": "مبلغ معتبر نیست.",
+        "amountPositive": "مبلغ باید بزرگ‌تر از صفر باشد.",
+        "amountNoFraction": "برای این ارز مبلغ باید بدون اعشار باشد.",
+        "amountTooManyFractions": "برای این ارز حداکثر دو رقم اعشار مجاز است.",
+        "dateInvalid": "تاریخ معتبر نیست.",
+        "contactNameRequired": "نام شخص تازه را بنویسید.",
+        "contactCreate": "شخص تازه ساخته نشد. دوباره تلاش کنید.",
+        "generic": "ثبت ذخیره نشد. دوباره تلاش کنید."
+      }
+    },
+    "transactionList": {
+      "edit": "ویرایش ثبت",
+      "delete": "حذف ثبت",
+      "deleteQuestion": "آیا مطمئن هستید؟",
+      "deleteDescription": "این ثبت برای همیشه حذف می‌شود.",
+      "deleteError": "ثبت حذف نشد. دوباره تلاش کنید."
+    },
+    "contacts": {
+      "title": "اشخاص",
+      "subtitle": "اشخاصی را که با آن‌ها دادوستد دارید مدیریت کنید؛ مانده هر شخص جدا برای هر ارز محاسبه می‌شود.",
+      "new": "شخص تازه",
+      "emptyTitle": "هنوز شخصی ندارید",
+      "emptyDescription": "اشخاصی را که با آن‌ها دریافت، پرداخت یا قرض دارید اضافه کنید.",
+      "balance": "مانده",
+      "view": "دیدن حساب {name}",
+      "edit": "ویرایش شخص",
+      "delete": "حذف شخص",
+      "deleteQuestion": "آیا مطمئن هستید؟",
+      "deleteDescription": "شخص حذف می‌شود، اما ثبت‌هایش باقی می‌مانند.",
+      "deleteError": "شخص حذف نشد. دوباره تلاش کنید."
+    },
+    "contactForm": {
+      "createTitle": "شخص تازه",
+      "editTitle": "ویرایش شخص",
+      "nameLabel": "نام",
+      "namePlaceholder": "نام شخص",
+      "phoneLabel": "تلفن (اختیاری)",
+      "phonePlaceholder": "مثلاً ۰۹۱۲۳۴۵۶۷۸۹",
+      "noteLabel": "یادداشت (اختیاری)",
+      "notePlaceholder": "یادداشت اختیاری",
+      "save": "ذخیره شخص",
+      "errors": {
+        "nameRequired": "نام شخص را بنویسید.",
+        "generic": "شخص ذخیره نشد. دوباره تلاش کنید."
+      }
+    },
+    "summary": {
+      "title": "خلاصه",
+      "subtitle": "موجودی آغازین، مانده دفتر، طلب و بدهی اشخاص، و جمع دریافت‌ها و پرداخت‌ها، جدا برای هر ارز.",
+      "emptyTitle": "هنوز داده‌ای برای خلاصه نیست",
+      "emptyDescription": "پس از ثبت نخستین دریافت یا افزودن شخص، خلاصه این‌جا ساخته می‌شود.",
+      "currentMonth": "ماه جاری",
+      "received": "دریافت",
+      "paid": "پرداخت",
+      "currentYear": "سال جاری",
+      "currencyBalances": "مانده به تفکیک ارز",
+      "currencyBalancesHint": "مانده از موجودی آغازین و همهٔ ثبت‌های دفتر؛ طلب و بدهی فقط از مانده اشخاص.",
+      "opening": "موجودی آغازین",
+      "balance": "مانده",
+      "receivable": "طلب (از اشخاص)",
+      "payable": "بدهی (به اشخاص)"
+    },
+    "contactDetail": {
+      "back": "همه اشخاص",
+      "eyebrow": "شخص",
+      "phone": "تلفن",
+      "note": "یادداشت",
+      "balance": "مانده",
+      "history": "تاریخچه ثبت‌ها",
+      "emptyHistoryTitle": "هنوز ثبتی ندارد",
+      "emptyHistoryDescription": "برای این شخص هنوز دریافت، پرداخت یا قرضی ثبت نشده است."
+    },
+    "balance": {
+      "receivable": "طلب",
+      "payable": "بدهی",
+      "zero": "بدون مانده"
+    },
+    "workspace": {
+      "loadError": "اطلاعات دفتر بارگذاری نشد."
+    }
+  },
+  "notFound": {
+    "code": "۴۰۴",
+    "title": "صفحه پیدا نشد",
+    "description": "نشانی مورد نظر وجود ندارد یا جابه‌جا شده است.",
+    "backHome": "بازگشت به خانه"
+  },
+  "footer": {
+    "note": "دفتر حساب شخصی، فقط برای ثبت؛ بدون پرداخت."
+  }
+}
