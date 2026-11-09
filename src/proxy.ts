@@ -7,7 +7,7 @@ import { refreshSession } from "@/lib/supabase/session";
 const intlMiddleware = createMiddleware(routing);
 
 const AUTH_ROUTES = new Set(["/login", "/register", "/forgot-password"]);
-const PROTECTED_PREFIXES = ["/dashboard", "/ledgers"];
+const PROTECTED_PREFIXES = ["/dashboard", "/ledgers", "/settings"];
 
 function splitLocale(pathname: string) {
   const segments = pathname.split("/").filter(Boolean);

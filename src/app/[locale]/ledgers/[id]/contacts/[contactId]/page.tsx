@@ -14,6 +14,7 @@ import {
 } from "@/lib/ledgers/constants";
 import { TRANSACTION_KIND_BADGE } from "@/lib/ledgers/presentation";
 import { groupTransactionsByDate } from "@/lib/ledgers/transactions";
+import { loadProfileCalendar } from "@/lib/profile/server";
 import { createClient } from "@/lib/supabase/server";
 import { formatMoney } from "@/lib/money";
 import { cn } from "@/lib/cn";
@@ -48,6 +49,12 @@ export default async function ContactPage({
     redirect({ href: "/login", locale: activeLocale });
     return null;
   }
+
+  const calendar = await loadProfileCalendar(
+    supabase,
+    user,
+    activeLocale,
+  );
 
   const { data: ledger, error: ledgerError } = await supabase
     .from("ledgers")
@@ -108,6 +115,8 @@ export default async function ContactPage({
   const groups = groupTransactionsByDate(transactions);
   const t = await getTranslations("ledgers.contactDetail");
   const kinds = await getTranslations("ledgers.kinds");
+  const calendarMessages = await getTranslations("calendar");
+  const monthNames = calendarMessages.raw("months.jalali") as string[];
 
   return (
     <div className="space-y-6">
@@ -186,7 +195,11 @@ export default async function ContactPage({
               <section key={group.date}>
                 <div className="flex items-center gap-3">
                   <h3 className="shrink-0 text-xs font-medium text-muted">
-                    {formatDisplayDate(group.date, locale)}
+                    {formatDisplayDate(group.date, {
+                      calendar,
+                      locale,
+                      monthNames,
+                    })}
                   </h3>
                   <span className="h-px flex-1 bg-line/70" />
                 </div>

@@ -8,6 +8,7 @@ import {
   isLedgerCurrency,
   type Ledger,
 } from "@/lib/ledgers/constants";
+import { loadProfileCalendar } from "@/lib/profile/server";
 import { createClient } from "@/lib/supabase/server";
 
 export const dynamic = "force-dynamic";
@@ -44,6 +45,12 @@ export default async function LedgerPage({
     redirect({ href: "/login", locale: activeLocale });
     return null;
   }
+
+  const calendar = await loadProfileCalendar(
+    supabase,
+    user,
+    activeLocale,
+  );
 
   const { data, error } = await supabase
     .from("ledgers")
@@ -121,6 +128,7 @@ export default async function LedgerPage({
 
       <LedgerWorkspace
         key={initialTab}
+        calendar={calendar}
         ledger={ledger}
         initialTab={initialTab}
       />

@@ -33,6 +33,68 @@
     "passwordHint": "At least 6 characters",
     "confirmPassword": "Confirm password"
   },
+  "calendar": {
+    "systems": {
+      "gregorian": "Gregorian",
+      "jalali": "Jalali"
+    },
+    "months": {
+      "jalali": [
+        "Farvardin",
+        "Ordibehesht",
+        "Khordad",
+        "Tir",
+        "Mordad",
+        "Shahrivar",
+        "Mehr",
+        "Aban",
+        "Azar",
+        "Dey",
+        "Bahman",
+        "Esfand"
+      ]
+    },
+    "weekdays": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "weekdaysShort": [
+      "Su",
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa"
+    ],
+    "today": "Today",
+    "previousMonth": "Previous month",
+    "nextMonth": "Next month",
+    "openPicker": "Open calendar",
+    "dateHint": "Calendar: {calendar}. Format: year/month/day; Persian digits are also accepted."
+  },
+  "settings": {
+    "open": "Settings",
+    "eyebrow": "Settings",
+    "title": "Account settings",
+    "subtitle": "Choose how dates and the calendar are shown in your ledger.",
+    "back": "Back to ledgers",
+    "calendarTitle": "Calendar",
+    "calendarDescription": "Dates are always stored in Gregorian format in the database. This choice only changes how dates are displayed and entered.",
+    "calendarHint": "Jalali is suggested for Persian-language accounts.",
+    "preview": "Preview",
+    "save": "Save settings",
+    "saving": "Saving…",
+    "saved": "Settings saved.",
+    "errors": {
+      "generic": "We couldn't save your settings. Please try again."
+    }
+  },
   "auth": {
     "login": {
       "title": "Welcome back",

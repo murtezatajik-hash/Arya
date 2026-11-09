@@ -4,9 +4,11 @@ import { useState, type FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import { CalendarDateField } from "@/components/ui/CalendarDateField";
 import { SelectField } from "@/components/ui/SelectField";
 import { TextArea } from "@/components/ui/TextArea";
 import { TextField } from "@/components/ui/TextField";
+import type { CalendarSystem } from "@/lib/dates/calendar";
 import { isValidIsoDate, todayIso } from "@/lib/dates/values";
 import {
   isLedgerCurrency,
@@ -28,6 +30,7 @@ import {
 } from "@/lib/money";
 
 type TransactionFormProps = {
+  calendar: CalendarSystem;
   defaultCurrency: LedgerCurrency;
   contacts: Contact[];
   transaction?: LedgerTransaction | null;
@@ -39,6 +42,7 @@ type TransactionFormProps = {
 type FormError = "contact" | "generic" | null;
 
 export function TransactionForm({
+  calendar,
   defaultCurrency,
   contacts,
   transaction,
@@ -47,6 +51,7 @@ export function TransactionForm({
   onCancel,
 }: TransactionFormProps) {
   const t = useTranslations("ledgers.transactionForm");
+  const calendarMessages = useTranslations("calendar");
   const kinds = useTranslations("ledgers.kinds");
   const currencies = useTranslations("ledgers.currencies");
   const common = useTranslations("ledgers.common");
@@ -65,7 +70,7 @@ export function TransactionForm({
   );
   const [currency, setCurrency] =
     useState<LedgerCurrency>(initialCurrency);
-  const [occurredOn, setOccurredOn] = useState(
+  const [occurredOn, setOccurredOn] = useState<string | null>(
     transaction?.occurred_on ?? todayIso(),
   );
   const [contactId, setContactId] = useState(
@@ -116,10 +121,12 @@ export function TransactionForm({
       return;
     }
 
-    if (!isValidIsoDate(occurredOn)) {
+    if (!occurredOn || !isValidIsoDate(occurredOn)) {
       setDateError(true);
       return;
     }
+
+    const occurredOnIso = occurredOn;
 
     setAmountError(null);
     setDateError(false);
@@ -151,7 +158,7 @@ export function TransactionForm({
           kind,
           amount: parsedAmount.amount,
           currency,
-          occurredOn,
+          occurredOn: occurredOnIso,
           contactId: finalContactId,
           description: description.trim() || null,
         },
@@ -244,18 +251,19 @@ export function TransactionForm({
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2">
-          <TextField
+          <CalendarDateField
+            calendar={calendar}
             label={t("dateLabel")}
-            name="occurred_on"
-            type="date"
-            value={occurredOn}
-            onChange={(event) => {
-              setOccurredOn(event.target.value);
+            value={occurredOn ?? ""}
+            onChange={(value) => {
+              setOccurredOn(value);
               setDateError(false);
               setError(null);
             }}
             error={dateError ? t("errors.dateInvalid") : undefined}
-            dir="ltr"
+            hint={calendarMessages("dateHint", {
+              calendar: calendarMessages(`systems.${calendar}`),
+            })}
             required
           />
 

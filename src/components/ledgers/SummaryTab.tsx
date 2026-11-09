@@ -4,8 +4,12 @@ import { useMemo } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { cn } from "@/lib/cn";
+import {
+  getCalendarPeriod,
+  isIsoInRange,
+  type CalendarSystem,
+} from "@/lib/dates/calendar";
 import { formatMonthYear, formatYear } from "@/lib/dates/display";
-import { getCurrentPeriod } from "@/lib/dates/values";
 import {
   calculateContactBalanceMap,
   calculateContactTotals,
@@ -23,6 +27,7 @@ import type {
 import { formatMoney } from "@/lib/money";
 
 type SummaryTabProps = {
+  calendar: CalendarSystem;
   defaultCurrency: LedgerCurrency;
   contacts: Contact[];
   transactions: LedgerTransaction[];
@@ -162,14 +167,20 @@ function CurrencySummaryCard({
 }
 
 export function SummaryTab({
+  calendar,
   defaultCurrency,
   contacts,
   transactions,
   openings,
 }: SummaryTabProps) {
   const t = useTranslations("ledgers.summary");
+  const calendarMessages = useTranslations("calendar");
   const locale = useLocale();
-  const period = getCurrentPeriod();
+  const monthNames = calendarMessages.raw("months.jalali") as string[];
+  const period = useMemo(
+    () => getCalendarPeriod(calendar),
+    [calendar],
+  );
 
   const ledgerBalances = useMemo(
     () => calculateLedgerBalances(transactions, openings),
@@ -187,9 +198,13 @@ export function SummaryTab({
         transactions,
         (transaction) =>
           transaction.kind === "received" &&
-          transaction.occurred_on.startsWith(period.monthKey),
+          isIsoInRange(
+            transaction.occurred_on,
+            period.monthStartIso,
+            period.monthEndIso,
+          ),
       ),
-    [transactions, period.monthKey],
+    [transactions, period.monthStartIso, period.monthEndIso],
   );
 
   const monthPaid = useMemo(
@@ -198,9 +213,13 @@ export function SummaryTab({
         transactions,
         (transaction) =>
           transaction.kind === "paid" &&
-          transaction.occurred_on.startsWith(period.monthKey),
+          isIsoInRange(
+            transaction.occurred_on,
+            period.monthStartIso,
+            period.monthEndIso,
+          ),
       ),
-    [transactions, period.monthKey],
+    [transactions, period.monthStartIso, period.monthEndIso],
   );
 
   const yearReceived = useMemo(
@@ -209,9 +228,13 @@ export function SummaryTab({
         transactions,
         (transaction) =>
           transaction.kind === "received" &&
-          transaction.occurred_on.startsWith(period.yearKey),
+          isIsoInRange(
+            transaction.occurred_on,
+            period.yearStartIso,
+            period.yearEndIso,
+          ),
       ),
-    [transactions, period.yearKey],
+    [transactions, period.yearStartIso, period.yearEndIso],
   );
 
   const yearPaid = useMemo(
@@ -220,9 +243,13 @@ export function SummaryTab({
         transactions,
         (transaction) =>
           transaction.kind === "paid" &&
-          transaction.occurred_on.startsWith(period.yearKey),
+          isIsoInRange(
+            transaction.occurred_on,
+            period.yearStartIso,
+            period.yearEndIso,
+          ),
       ),
-    [transactions, period.yearKey],
+    [transactions, period.yearStartIso, period.yearEndIso],
   );
 
   const contactTotals = useMemo(() => {
@@ -296,7 +323,11 @@ export function SummaryTab({
                 {t("currentMonth")}
               </h3>
               <span className="text-xs text-muted">
-                {formatMonthYear(period.year, period.month, locale)}
+                {formatMonthYear(period.year, period.month, {
+                  calendar,
+                  locale,
+                  monthNames,
+                })}
               </span>
             </div>
 

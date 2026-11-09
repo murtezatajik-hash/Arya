@@ -48,19 +48,3 @@ export function todayIso(now = new Date()): string {
 
   return `${year}-${month}-${day}`;
 }
-
-export type CurrentPeriod = {
-  year: number;
-  month: number;
-  yearKey: string;
-  monthKey: string;
-};
-
-export function getCurrentPeriod(now = new Date()): CurrentPeriod {
-  const year = now.getFullYear();
-  const month = now.getMonth() + 1;
-  const yearKey = String(year).padStart(4, "0");
-  const monthKey = `${yearKey}-${String(month).padStart(2, "0")}`;
-
-  return { year, month, yearKey, monthKey };
-}

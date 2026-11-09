@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": ".test-build",
+    "rootDir": "src/lib/dates",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node"]
+  },
+  "include": [
+    "src/lib/dates/calendar.ts",
+    "src/lib/dates/values.ts",
+    "src/lib/dates/calendar.test.ts"
+  ]
+}

@@ -1,8 +1,11 @@
+import {
+  calendarDateFromIso,
+  formatCalendarNumber,
+  type CalendarSystem,
+} from "./calendar";
 import { isValidIsoDate } from "./values";
 
-// The display adapter is intentionally isolated so a future Persian calendar
-// can replace the Gregorian calendar without touching stored dates.
-const DISPLAY_CALENDAR = "gregory";
+const GREGORIAN_CALENDAR = "gregory";
 
 function utcDate(year: number, month: number, day: number): Date {
   const date = new Date(0);
@@ -11,23 +14,57 @@ function utcDate(year: number, month: number, day: number): Date {
   return date;
 }
 
-export function formatDisplayDate(value: string, locale: string): string {
+export type DateDisplayOptions = {
+  calendar: CalendarSystem;
+  locale: string;
+  monthNames: readonly string[];
+};
+
+export function formatDisplayDate(
+  value: string,
+  { calendar, locale, monthNames }: DateDisplayOptions,
+): string {
   if (!isValidIsoDate(value)) {
     return value;
   }
 
-  const [year, month, day] = value.split("-").map(Number);
+  const date = calendarDateFromIso(value, calendar);
+
+  if (!date) {
+    return value;
+  }
+
+  if (calendar === "jalali") {
+    const monthName = monthNames[date.month - 1];
+
+    if (!monthName) {
+      return value;
+    }
+
+    return [
+      formatCalendarNumber(date.day, locale),
+      monthName,
+      formatCalendarNumber(date.year, locale),
+    ].join(" ");
+  }
 
   return new Intl.DateTimeFormat(locale, {
-    calendar: DISPLAY_CALENDAR,
+    calendar: GREGORIAN_CALENDAR,
     dateStyle: "medium",
     timeZone: "UTC",
-  }).format(utcDate(year, month, day));
+  }).format(utcDate(date.year, date.month, date.day));
 }
 
-export function formatMonthName(month: number, locale: string): string {
+export function formatMonthName(
+  month: number,
+  { calendar, locale, monthNames }: DateDisplayOptions,
+): string {
+  if (calendar === "jalali") {
+    return monthNames[month - 1] ?? "";
+  }
+
   return new Intl.DateTimeFormat(locale, {
-    calendar: DISPLAY_CALENDAR,
+    calendar: GREGORIAN_CALENDAR,
     month: "long",
     timeZone: "UTC",
   }).format(utcDate(2020, month, 1));
@@ -36,10 +73,20 @@ export function formatMonthName(month: number, locale: string): string {
 export function formatMonthYear(
   year: number,
   month: number,
-  locale: string,
+  { calendar, locale, monthNames }: DateDisplayOptions,
 ): string {
+  if (calendar === "jalali") {
+    const monthName = monthNames[month - 1];
+
+    if (!monthName) {
+      return "";
+    }
+
+    return `${monthName} ${formatCalendarNumber(year, locale)}`;
+  }
+
   return new Intl.DateTimeFormat(locale, {
-    calendar: DISPLAY_CALENDAR,
+    calendar: GREGORIAN_CALENDAR,
     month: "long",
     year: "numeric",
     timeZone: "UTC",
@@ -47,7 +94,5 @@ export function formatMonthYear(
 }
 
 export function formatYear(year: number, locale: string): string {
-  return new Intl.NumberFormat(locale, {
-    useGrouping: false,
-  }).format(year);
+  return formatCalendarNumber(year, locale);
 }

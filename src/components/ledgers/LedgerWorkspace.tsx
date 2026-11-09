@@ -11,6 +11,7 @@ import { RecordsTab } from "@/components/ledgers/RecordsTab";
 import { SummaryTab } from "@/components/ledgers/SummaryTab";
 import { useLedgerData } from "@/components/ledgers/use-ledger-data";
 import { cn } from "@/lib/cn";
+import type { CalendarSystem } from "@/lib/dates/calendar";
 import {
   isLedgerCurrency,
   type Ledger,
@@ -21,11 +22,13 @@ export type LedgerTab = "records" | "contacts" | "summary";
 const TABS: LedgerTab[] = ["records", "contacts", "summary"];
 
 type LedgerWorkspaceProps = {
+  calendar: CalendarSystem;
   ledger: Pick<Ledger, "id" | "name" | "default_currency">;
   initialTab: LedgerTab;
 };
 
 export function LedgerWorkspace({
+  calendar,
   ledger,
   initialTab,
 }: LedgerWorkspaceProps) {
@@ -120,6 +123,7 @@ export function LedgerWorkspace({
       >
         {tab === "records" ? (
           <RecordsTab
+            calendar={calendar}
             defaultCurrency={defaultCurrency}
             contacts={data.contacts}
             transactions={data.transactions}
@@ -143,6 +147,7 @@ export function LedgerWorkspace({
 
         {tab === "summary" ? (
           <SummaryTab
+            calendar={calendar}
             defaultCurrency={defaultCurrency}
             contacts={data.contacts}
             transactions={data.transactions}

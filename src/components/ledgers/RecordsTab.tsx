@@ -9,10 +9,15 @@ import { TextField } from "@/components/ui/TextField";
 import { TransactionForm } from "@/components/ledgers/TransactionForm";
 import { TransactionRow } from "@/components/ledgers/TransactionRow";
 import {
+  calendarDateFromIso,
+  type CalendarSystem,
+} from "@/lib/dates/calendar";
+import {
   formatDisplayDate,
   formatMonthName,
   formatYear,
 } from "@/lib/dates/display";
+import { todayIso } from "@/lib/dates/values";
 import {
   TRANSACTION_KINDS,
   type Contact,
@@ -27,6 +32,7 @@ import type {
 import { groupTransactionsByDate } from "@/lib/ledgers/transactions";
 
 type RecordsTabProps = {
+  calendar: CalendarSystem;
   defaultCurrency: LedgerCurrency;
   contacts: Contact[];
   transactions: LedgerTransaction[];
@@ -61,6 +67,7 @@ const emptyFilters: Filters = {
 };
 
 export function RecordsTab({
+  calendar,
   defaultCurrency,
   contacts,
   transactions,
@@ -72,7 +79,9 @@ export function RecordsTab({
   const t = useTranslations("ledgers.records");
   const common = useTranslations("ledgers.common");
   const kinds = useTranslations("ledgers.kinds");
+  const calendarMessages = useTranslations("calendar");
   const locale = useLocale();
+  const monthNames = calendarMessages.raw("months.jalali") as string[];
   const [formState, setFormState] = useState<FormState>(null);
   const [filters, setFilters] = useState<Filters>(emptyFilters);
   const deferredSearch = useDeferredValue(filters.search);
@@ -83,15 +92,26 @@ export function RecordsTab({
   );
 
   const years = useMemo(() => {
-    const values = new Set(
-      transactions.map((transaction) => transaction.occurred_on.slice(0, 4)),
-    );
-    values.add(String(new Date().getFullYear()).padStart(4, "0"));
+    const values = new Set<string>();
 
-    return Array.from(values).sort((first, second) =>
-      second.localeCompare(first),
+    for (const transaction of transactions) {
+      const date = calendarDateFromIso(transaction.occurred_on, calendar);
+
+      if (date) {
+        values.add(String(date.year));
+      }
+    }
+
+    const currentYear = calendarDateFromIso(todayIso(), calendar)?.year;
+
+    if (currentYear) {
+      values.add(String(currentYear));
+    }
+
+    return Array.from(values).sort(
+      (first, second) => Number(second) - Number(first),
     );
-  }, [transactions]);
+  }, [transactions, calendar]);
 
   const needle = deferredSearch.trim().toLocaleLowerCase(locale);
 
@@ -116,18 +136,23 @@ export function RecordsTab({
         return false;
       }
 
-      if (
-        filters.year &&
-        transaction.occurred_on.slice(0, 4) !== filters.year
-      ) {
-        return false;
-      }
+      if (filters.year || filters.month) {
+        const date = calendarDateFromIso(transaction.occurred_on, calendar);
 
-      if (
-        filters.month &&
-        transaction.occurred_on.slice(5, 7) !== filters.month
-      ) {
-        return false;
+        if (!date) {
+          return false;
+        }
+
+        if (filters.year && String(date.year) !== filters.year) {
+          return false;
+        }
+
+        if (
+          filters.month &&
+          String(date.month).padStart(2, "0") !== filters.month
+        ) {
+          return false;
+        }
       }
 
       if (
@@ -141,7 +166,7 @@ export function RecordsTab({
 
       return true;
     });
-  }, [transactions, filters, needle, locale]);
+  }, [transactions, filters, needle, locale, calendar]);
 
   const groups = useMemo(
     () => groupTransactionsByDate(filteredTransactions),
@@ -211,6 +236,7 @@ export function RecordsTab({
         <div className="mt-5">
           <TransactionForm
             key={editingTransaction?.id ?? "new"}
+            calendar={calendar}
             defaultCurrency={defaultCurrency}
             contacts={contacts}
             transaction={editingTransaction}
@@ -255,7 +281,11 @@ export function RecordsTab({
 
                 return (
                   <option key={value} value={value}>
-                    {formatMonthName(month, locale)}
+                    {formatMonthName(month, {
+                      calendar,
+                      locale,
+                      monthNames,
+                    })}
                   </option>
                 );
               },
@@ -364,7 +394,11 @@ export function RecordsTab({
             <section key={group.date}>
               <div className="flex items-center gap-3">
                 <h3 className="shrink-0 text-xs font-medium text-muted">
-                  {formatDisplayDate(group.date, locale)}
+                  {formatDisplayDate(group.date, {
+                    calendar,
+                    locale,
+                    monthNames,
+                  })}
                 </h3>
                 <span className="h-px flex-1 bg-line/70" />
               </div>
