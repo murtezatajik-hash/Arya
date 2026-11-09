@@ -4,7 +4,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "outDir": ".test-build",
-    "rootDir": "src/lib/dates",
+    "rootDir": "src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
@@ -13,6 +13,9 @@
   "include": [
     "src/lib/dates/calendar.ts",
     "src/lib/dates/values.ts",
-    "src/lib/dates/calendar.test.ts"
+    "src/lib/dates/calendar.test.ts",
+    "src/lib/profile/calendar.ts",
+    "src/lib/profile/save-calendar.ts",
+    "src/lib/profile/save-calendar.test.ts"
   ]
 }

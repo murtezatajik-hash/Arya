@@ -23,12 +23,14 @@ const TABS: LedgerTab[] = ["records", "contacts", "summary"];
 
 type LedgerWorkspaceProps = {
   calendar: CalendarSystem;
+  hijriOffset: number;
   ledger: Pick<Ledger, "id" | "name" | "default_currency">;
   initialTab: LedgerTab;
 };
 
 export function LedgerWorkspace({
   calendar,
+  hijriOffset,
   ledger,
   initialTab,
 }: LedgerWorkspaceProps) {
@@ -124,6 +126,7 @@ export function LedgerWorkspace({
         {tab === "records" ? (
           <RecordsTab
             calendar={calendar}
+            hijriOffset={hijriOffset}
             defaultCurrency={defaultCurrency}
             contacts={data.contacts}
             transactions={data.transactions}
@@ -148,6 +151,7 @@ export function LedgerWorkspace({
         {tab === "summary" ? (
           <SummaryTab
             calendar={calendar}
+            hijriOffset={hijriOffset}
             defaultCurrency={defaultCurrency}
             contacts={data.contacts}
             transactions={data.transactions}

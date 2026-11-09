@@ -5,7 +5,10 @@ import { BalanceList } from "@/components/ledgers/BalanceList";
 import { EmptyState } from "@/components/ui/EmptyState";
 import { Link, redirect } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
-import { formatDisplayDate } from "@/lib/dates/display";
+import {
+  formatDisplayDate,
+  type CalendarMonthNames,
+} from "@/lib/dates/display";
 import { calculateContactBalances } from "@/lib/ledgers/balances";
 import {
   isTransactionKind,
@@ -50,7 +53,7 @@ export default async function ContactPage({
     return null;
   }
 
-  const calendar = await loadProfileCalendar(
+  const profileCalendar = await loadProfileCalendar(
     supabase,
     user,
     activeLocale,
@@ -116,7 +119,9 @@ export default async function ContactPage({
   const t = await getTranslations("ledgers.contactDetail");
   const kinds = await getTranslations("ledgers.kinds");
   const calendarMessages = await getTranslations("calendar");
-  const monthNames = calendarMessages.raw("months.jalali") as string[];
+  const monthNames = calendarMessages.raw(
+    "months",
+  ) as CalendarMonthNames;
 
   return (
     <div className="space-y-6">
@@ -196,9 +201,10 @@ export default async function ContactPage({
                 <div className="flex items-center gap-3">
                   <h3 className="shrink-0 text-xs font-medium text-muted">
                     {formatDisplayDate(group.date, {
-                      calendar,
+                      calendar: profileCalendar.calendar,
                       locale,
                       monthNames,
+                      hijriOffset: profileCalendar.hijriOffset,
                     })}
                   </h3>
                   <span className="h-px flex-1 bg-line/70" />

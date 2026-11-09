@@ -1,24 +1,24 @@
 import type { SupabaseClient, User } from "@supabase/supabase-js";
 import {
-  defaultCalendarForLocale,
-  type CalendarSystem,
-} from "@/lib/dates/calendar";
-import { resolveProfileCalendar } from "./calendar";
+  resolveProfileCalendar,
+  type ProfileCalendar,
+} from "./calendar";
 
 type ProfileCalendarRow = {
   calendar: unknown;
+  hijri_offset: unknown;
 };
 
-type ProfileUser = Pick<User, "id" | "user_metadata">;
+type ProfileUser = Pick<User, "id">;
 
 export async function loadProfileCalendar(
   supabase: SupabaseClient,
   user: ProfileUser,
   locale: string,
-): Promise<CalendarSystem> {
+): Promise<ProfileCalendar> {
   const { data, error } = await supabase
     .from("profiles")
-    .select("calendar")
+    .select("calendar, hijri_offset")
     .eq("id", user.id)
     .maybeSingle();
 
@@ -26,20 +26,11 @@ export async function loadProfileCalendar(
     throw new Error(error.message);
   }
 
-  const storedCalendar = (data as ProfileCalendarRow | null)?.calendar;
-  const hasExplicitChoice = user.user_metadata?.calendar_explicit === true;
+  const row = data as ProfileCalendarRow | null;
 
-  // New profiles get a database default of "gregorian". Until the user saves
-  // an explicit choice, follow the language default instead. This lets a
-  // Persian account start on the Jalali calendar without changing the schema
-  // and still lets the user switch back to Gregorian from settings.
-  if (!hasExplicitChoice && !isNonDefaultCalendar(storedCalendar)) {
-    return defaultCalendarForLocale(locale);
-  }
-
-  return resolveProfileCalendar(storedCalendar, locale);
-}
-
-function isNonDefaultCalendar(value: unknown): boolean {
-  return value === "jalali";
+  return resolveProfileCalendar(
+    row?.calendar,
+    row?.hijri_offset,
+    locale,
+  );
 }

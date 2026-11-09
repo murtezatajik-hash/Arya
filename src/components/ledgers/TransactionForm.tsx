@@ -31,6 +31,7 @@ import {
 
 type TransactionFormProps = {
   calendar: CalendarSystem;
+  hijriOffset: number;
   defaultCurrency: LedgerCurrency;
   contacts: Contact[];
   transaction?: LedgerTransaction | null;
@@ -43,6 +44,7 @@ type FormError = "contact" | "generic" | null;
 
 export function TransactionForm({
   calendar,
+  hijriOffset,
   defaultCurrency,
   contacts,
   transaction,
@@ -253,6 +255,7 @@ export function TransactionForm({
         <div className="grid gap-4 sm:grid-cols-2">
           <CalendarDateField
             calendar={calendar}
+            hijriOffset={hijriOffset}
             label={t("dateLabel")}
             value={occurredOn ?? ""}
             onChange={(value) => {

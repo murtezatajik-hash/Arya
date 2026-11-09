@@ -16,6 +16,7 @@ import {
   formatDisplayDate,
   formatMonthName,
   formatYear,
+  type CalendarMonthNames,
 } from "@/lib/dates/display";
 import { todayIso } from "@/lib/dates/values";
 import {
@@ -33,6 +34,7 @@ import { groupTransactionsByDate } from "@/lib/ledgers/transactions";
 
 type RecordsTabProps = {
   calendar: CalendarSystem;
+  hijriOffset: number;
   defaultCurrency: LedgerCurrency;
   contacts: Contact[];
   transactions: LedgerTransaction[];
@@ -68,6 +70,7 @@ const emptyFilters: Filters = {
 
 export function RecordsTab({
   calendar,
+  hijriOffset,
   defaultCurrency,
   contacts,
   transactions,
@@ -81,7 +84,9 @@ export function RecordsTab({
   const kinds = useTranslations("ledgers.kinds");
   const calendarMessages = useTranslations("calendar");
   const locale = useLocale();
-  const monthNames = calendarMessages.raw("months.jalali") as string[];
+  const monthNames = calendarMessages.raw(
+    "months",
+  ) as CalendarMonthNames;
   const [formState, setFormState] = useState<FormState>(null);
   const [filters, setFilters] = useState<Filters>(emptyFilters);
   const deferredSearch = useDeferredValue(filters.search);
@@ -95,14 +100,22 @@ export function RecordsTab({
     const values = new Set<string>();
 
     for (const transaction of transactions) {
-      const date = calendarDateFromIso(transaction.occurred_on, calendar);
+      const date = calendarDateFromIso(
+        transaction.occurred_on,
+        calendar,
+        hijriOffset,
+      );
 
       if (date) {
         values.add(String(date.year));
       }
     }
 
-    const currentYear = calendarDateFromIso(todayIso(), calendar)?.year;
+    const currentYear = calendarDateFromIso(
+      todayIso(),
+      calendar,
+      hijriOffset,
+    )?.year;
 
     if (currentYear) {
       values.add(String(currentYear));
@@ -111,7 +124,7 @@ export function RecordsTab({
     return Array.from(values).sort(
       (first, second) => Number(second) - Number(first),
     );
-  }, [transactions, calendar]);
+  }, [transactions, calendar, hijriOffset]);
 
   const needle = deferredSearch.trim().toLocaleLowerCase(locale);
 
@@ -137,7 +150,11 @@ export function RecordsTab({
       }
 
       if (filters.year || filters.month) {
-        const date = calendarDateFromIso(transaction.occurred_on, calendar);
+        const date = calendarDateFromIso(
+          transaction.occurred_on,
+          calendar,
+          hijriOffset,
+        );
 
         if (!date) {
           return false;
@@ -166,7 +183,14 @@ export function RecordsTab({
 
       return true;
     });
-  }, [transactions, filters, needle, locale, calendar]);
+  }, [
+    transactions,
+    filters,
+    needle,
+    locale,
+    calendar,
+    hijriOffset,
+  ]);
 
   const groups = useMemo(
     () => groupTransactionsByDate(filteredTransactions),
@@ -237,6 +261,7 @@ export function RecordsTab({
           <TransactionForm
             key={editingTransaction?.id ?? "new"}
             calendar={calendar}
+            hijriOffset={hijriOffset}
             defaultCurrency={defaultCurrency}
             contacts={contacts}
             transaction={editingTransaction}
@@ -285,6 +310,7 @@ export function RecordsTab({
                       calendar,
                       locale,
                       monthNames,
+                      hijriOffset,
                     })}
                   </option>
                 );
@@ -398,6 +424,7 @@ export function RecordsTab({
                     calendar,
                     locale,
                     monthNames,
+                    hijriOffset,
                   })}
                 </h3>
                 <span className="h-px flex-1 bg-line/70" />

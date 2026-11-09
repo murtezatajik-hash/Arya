@@ -9,7 +9,11 @@ import {
   isIsoInRange,
   type CalendarSystem,
 } from "@/lib/dates/calendar";
-import { formatMonthYear, formatYear } from "@/lib/dates/display";
+import {
+  formatMonthYear,
+  formatYear,
+  type CalendarMonthNames,
+} from "@/lib/dates/display";
 import {
   calculateContactBalanceMap,
   calculateContactTotals,
@@ -28,6 +32,7 @@ import { formatMoney } from "@/lib/money";
 
 type SummaryTabProps = {
   calendar: CalendarSystem;
+  hijriOffset: number;
   defaultCurrency: LedgerCurrency;
   contacts: Contact[];
   transactions: LedgerTransaction[];
@@ -168,6 +173,7 @@ function CurrencySummaryCard({
 
 export function SummaryTab({
   calendar,
+  hijriOffset,
   defaultCurrency,
   contacts,
   transactions,
@@ -176,10 +182,12 @@ export function SummaryTab({
   const t = useTranslations("ledgers.summary");
   const calendarMessages = useTranslations("calendar");
   const locale = useLocale();
-  const monthNames = calendarMessages.raw("months.jalali") as string[];
+  const monthNames = calendarMessages.raw(
+    "months",
+  ) as CalendarMonthNames;
   const period = useMemo(
-    () => getCalendarPeriod(calendar),
-    [calendar],
+    () => getCalendarPeriod(calendar, new Date(), hijriOffset),
+    [calendar, hijriOffset],
   );
 
   const ledgerBalances = useMemo(
@@ -327,6 +335,7 @@ export function SummaryTab({
                   calendar,
                   locale,
                   monthNames,
+                  hijriOffset,
                 })}
               </span>
             </div>

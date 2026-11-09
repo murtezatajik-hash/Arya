@@ -46,7 +46,7 @@ export default async function LedgerPage({
     return null;
   }
 
-  const calendar = await loadProfileCalendar(
+  const profileCalendar = await loadProfileCalendar(
     supabase,
     user,
     activeLocale,
@@ -128,7 +128,8 @@ export default async function LedgerPage({
 
       <LedgerWorkspace
         key={initialTab}
-        calendar={calendar}
+        calendar={profileCalendar.calendar}
+        hijriOffset={profileCalendar.hijriOffset}
         ledger={ledger}
         initialTab={initialTab}
       />

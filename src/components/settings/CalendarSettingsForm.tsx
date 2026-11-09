@@ -4,26 +4,45 @@ import { useState, type FormEvent } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
+import { SelectField } from "@/components/ui/SelectField";
 import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/cn";
 import {
   CALENDAR_SYSTEMS,
+  HIJRI_OFFSETS,
+  clampHijriOffset,
+  formatCalendarNumber,
   type CalendarSystem,
 } from "@/lib/dates/calendar";
-import { formatDisplayDate } from "@/lib/dates/display";
+import {
+  formatDisplayDate,
+  type CalendarMonthNames,
+} from "@/lib/dates/display";
 import { todayIso } from "@/lib/dates/values";
+import { saveProfileCalendar } from "@/lib/profile/save-calendar";
 import { createClient } from "@/lib/supabase/client";
 
 type CalendarSettingsFormProps = {
   userId: string;
   initialCalendar: CalendarSystem;
+  initialHijriOffset: number;
 };
 
 type SaveStatus = "idle" | "saved" | "error";
 
+function formatOffset(value: number, locale: string): string {
+  if (value === 0) {
+    return formatCalendarNumber(0, locale);
+  }
+
+  const sign = value > 0 ? "+" : "-";
+  return `${sign}${formatCalendarNumber(Math.abs(value), locale)}`;
+}
+
 export function CalendarSettingsForm({
   userId,
   initialCalendar,
+  initialHijriOffset,
 }: CalendarSettingsFormProps) {
   const t = useTranslations("settings");
   const calendarMessages = useTranslations("calendar");
@@ -31,10 +50,14 @@ export function CalendarSettingsForm({
   const router = useRouter();
   const [calendar, setCalendar] =
     useState<CalendarSystem>(initialCalendar);
+  const [hijriOffset, setHijriOffset] = useState(
+    clampHijriOffset(initialHijriOffset),
+  );
   const [status, setStatus] = useState<SaveStatus>("idle");
   const [pending, setPending] = useState(false);
-  const monthNames = calendarMessages.raw("months.jalali") as string[];
-  const previewOptions = { calendar, locale, monthNames };
+  const monthNames = calendarMessages.raw(
+    "months",
+  ) as CalendarMonthNames;
   const today = todayIso();
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -44,38 +67,22 @@ export function CalendarSettingsForm({
 
     try {
       const supabase = createClient();
-      const { data, error } = await supabase
-        .from("profiles")
-        .update({ calendar })
-        .eq("id", userId)
-        .select("id")
-        .maybeSingle();
 
-      if (error) {
-        throw error;
-      }
-
-      if (!data) {
-        const { error: insertError } = await supabase
-          .from("profiles")
-          .insert({ id: userId, calendar });
-
-        if (insertError) {
-          throw insertError;
-        }
-      }
-
-      const { error: preferenceError } = await supabase.auth.updateUser({
-        data: { calendar_explicit: true },
-      });
-
-      if (preferenceError) {
-        throw preferenceError;
-      }
+      await saveProfileCalendar(
+        (values, options) =>
+          supabase.from("profiles").upsert(values, options),
+        {
+          userId,
+          calendar,
+          hijriOffset,
+          locale,
+        },
+      );
 
       setStatus("saved");
       router.refresh();
-    } catch {
+    } catch (error) {
+      console.error("Calendar settings save failed", error);
       setStatus("error");
     } finally {
       setPending(false);
@@ -98,7 +105,7 @@ export function CalendarSettingsForm({
           {t("calendarHint")}
         </p>
 
-        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+        <div className="mt-4 grid gap-3 sm:grid-cols-3">
           {CALENDAR_SYSTEMS.map((system) => {
             const selected = calendar === system;
 
@@ -131,7 +138,7 @@ export function CalendarSettingsForm({
                   <span
                     aria-hidden="true"
                     className={cn(
-                      "flex size-4 items-center justify-center rounded-full border",
+                      "flex size-4 shrink-0 items-center justify-center rounded-full border",
                       selected
                         ? "border-accent bg-accent"
                         : "border-line",
@@ -147,8 +154,10 @@ export function CalendarSettingsForm({
                   {t("preview")}:{" "}
                   <span className="text-ink/90">
                     {formatDisplayDate(today, {
-                      ...previewOptions,
                       calendar: system,
+                      locale,
+                      monthNames,
+                      hijriOffset,
                     })}
                   </span>
                 </span>
@@ -156,6 +165,28 @@ export function CalendarSettingsForm({
             );
           })}
         </div>
+
+        {calendar === "hijri" ? (
+          <div className="mt-4 rounded-2xl border border-line bg-surface/70 p-4">
+            <SelectField
+              label={t("hijriOffsetTitle")}
+              value={String(hijriOffset)}
+              onChange={(event) => {
+                setHijriOffset(
+                  clampHijriOffset(Number(event.target.value)),
+                );
+                setStatus("idle");
+              }}
+              hint={t("hijriOffsetDescription")}
+            >
+              {HIJRI_OFFSETS.map((offset) => (
+                <option key={offset} value={offset}>
+                  {formatOffset(offset, locale)}
+                </option>
+              ))}
+            </SelectField>
+          </div>
+        ) : null}
       </fieldset>
 
       <div className="mt-5 space-y-3">

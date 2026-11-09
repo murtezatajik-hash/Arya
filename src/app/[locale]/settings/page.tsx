@@ -24,7 +24,7 @@ export default async function SettingsPage() {
     return null;
   }
 
-  const [calendar, t] = await Promise.all([
+  const [profileCalendar, t] = await Promise.all([
     loadProfileCalendar(supabase, user, activeLocale),
     getTranslations("settings"),
   ]);
@@ -64,7 +64,8 @@ export default async function SettingsPage() {
 
       <CalendarSettingsForm
         userId={user.id}
-        initialCalendar={calendar}
+        initialCalendar={profileCalendar.calendar}
+        initialHijriOffset={profileCalendar.hijriOffset}
       />
     </div>
   );

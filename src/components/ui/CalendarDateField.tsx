@@ -5,22 +5,24 @@ import { useLocale, useTranslations } from "next-intl";
 import { cn } from "@/lib/cn";
 import {
   addCalendarMonths,
+  addIsoDays,
   calendarDateFromIso,
   formatCalendarDateInput,
   formatCalendarNumber,
   getCalendarMonthInfo,
-  isoFromCalendarDate,
   parseCalendarDateInput,
   type CalendarSystem,
 } from "@/lib/dates/calendar";
 import {
   formatDisplayDate,
   formatMonthYear,
+  type CalendarMonthNames,
 } from "@/lib/dates/display";
 import { todayIso } from "@/lib/dates/values";
 
 type CalendarDateFieldProps = {
   calendar: CalendarSystem;
+  hijriOffset: number;
   label: string;
   value: string;
   onChange: (value: string | null) => void;
@@ -37,6 +39,7 @@ function localeWeekStart(locale: string): number {
 
 export function CalendarDateField({
   calendar,
+  hijriOffset,
   label,
   value,
   onChange,
@@ -50,22 +53,35 @@ export function CalendarDateField({
   const fieldId = `${generatedId}-field`;
   const panelId = `${generatedId}-panel`;
   const messageId = `${generatedId}-message`;
-  const monthNames = t.raw("months.jalali") as string[];
+  const monthNames = t.raw("months") as CalendarMonthNames;
   const weekdaysShort = t.raw("weekdaysShort") as string[];
   const initialDate =
-    calendarDateFromIso(value, calendar) ??
-    calendarDateFromIso(todayIso(), calendar);
+    calendarDateFromIso(value, calendar, hijriOffset) ??
+    calendarDateFromIso(todayIso(), calendar, hijriOffset);
   const [text, setText] = useState(() =>
-    value ? formatCalendarDateInput(value, calendar, locale) : "",
+    value
+      ? formatCalendarDateInput(value, calendar, locale, hijriOffset)
+      : "",
   );
   const [open, setOpen] = useState(false);
   const [view, setView] = useState(() => ({
     year: initialDate?.year ?? 1,
     month: initialDate?.month ?? 1,
   }));
-  const selectedDate = value ? calendarDateFromIso(value, calendar) : null;
-  const todayDate = calendarDateFromIso(todayIso(), calendar);
-  const monthInfo = getCalendarMonthInfo(calendar, view.year, view.month);
+  const selectedDate = value
+    ? calendarDateFromIso(value, calendar, hijriOffset)
+    : null;
+  const todayDate = calendarDateFromIso(
+    todayIso(),
+    calendar,
+    hijriOffset,
+  );
+  const monthInfo = getCalendarMonthInfo(
+    calendar,
+    view.year,
+    view.month,
+    hijriOffset,
+  );
   const weekStart = localeWeekStart(locale);
   const weekOrder = Array.from(
     { length: 7 },
@@ -73,17 +89,24 @@ export function CalendarDateField({
   );
   const leadingCells =
     (monthInfo.firstWeekday - weekStart + 7) % 7;
-  const displayOptions = { calendar, locale, monthNames };
+  const displayOptions = {
+    calendar,
+    locale,
+    monthNames,
+    hijriOffset,
+  };
   const message = error ?? hint;
 
   function selectIso(iso: string) {
-    const date = calendarDateFromIso(iso, calendar);
+    const date = calendarDateFromIso(iso, calendar, hijriOffset);
 
     if (!date) {
       return;
     }
 
-    setText(formatCalendarDateInput(iso, calendar, locale));
+    setText(
+      formatCalendarDateInput(iso, calendar, locale, hijriOffset),
+    );
     setView({ year: date.year, month: date.month });
     onChange(iso);
     setOpen(false);
@@ -91,7 +114,9 @@ export function CalendarDateField({
 
   function handleTextChange(nextValue: string) {
     setText(nextValue);
-    onChange(parseCalendarDateInput(nextValue, calendar));
+    onChange(
+      parseCalendarDateInput(nextValue, calendar, hijriOffset),
+    );
   }
 
   function setToday() {
@@ -130,6 +155,7 @@ export function CalendarDateField({
             todayIso(),
             calendar,
             locale,
+            hijriOffset,
           )}
           aria-invalid={error ? true : undefined}
           aria-describedby={message ? messageId : undefined}
@@ -239,10 +265,9 @@ export function CalendarDateField({
 
             {Array.from({ length: monthInfo.days }, (_, index) => {
               const day = index + 1;
-              const iso = isoFromCalendarDate(
-                { year: view.year, month: view.month, day },
-                calendar,
-              );
+              const iso = monthInfo.firstIso
+                ? addIsoDays(monthInfo.firstIso, index)
+                : null;
               const isSelected =
                 selectedDate?.year === view.year &&
                 selectedDate?.month === view.month &&

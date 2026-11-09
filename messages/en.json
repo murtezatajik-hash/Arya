@@ -36,9 +36,24 @@
   "calendar": {
     "systems": {
       "gregorian": "Gregorian",
-      "jalali": "Jalali"
+      "jalali": "Jalali (Solar Hijri)",
+      "hijri": "Hijri (Lunar)"
     },
     "months": {
+      "gregorian": [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+      ],
       "jalali": [
         "Farvardin",
         "Ordibehesht",
@@ -52,6 +67,20 @@
         "Dey",
         "Bahman",
         "Esfand"
+      ],
+      "hijri": [
+        "Muharram",
+        "Safar",
+        "Rabi' al-Awwal",
+        "Rabi' al-Thani",
+        "Jumada al-Awwal",
+        "Jumada al-Thani",
+        "Rajab",
+        "Sha'ban",
+        "Ramadan",
+        "Shawwal",
+        "Dhu al-Qi'dah",
+        "Dhu al-Hijjah"
       ]
     },
     "weekdays": [
@@ -86,14 +115,16 @@
     "back": "Back to ledgers",
     "calendarTitle": "Calendar",
     "calendarDescription": "Dates are always stored in Gregorian format in the database. This choice only changes how dates are displayed and entered.",
-    "calendarHint": "Jalali is suggested for Persian-language accounts.",
+    "calendarHint": "Language only suggests a default calendar; any language and calendar combination can be saved.",
     "preview": "Preview",
     "save": "Save settings",
     "saving": "Saving…",
     "saved": "Settings saved.",
     "errors": {
       "generic": "We couldn't save your settings. Please try again."
-    }
+    },
+    "hijriOffsetTitle": "Hijri day adjustment",
+    "hijriOffsetDescription": "Moon sighting varies by country. If the Hijri date differs by a day or two from your local calendar, adjust it here."
   },
   "auth": {
     "login": {
