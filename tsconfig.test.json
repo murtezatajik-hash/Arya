@@ -14,8 +14,16 @@
     "src/lib/dates/calendar.ts",
     "src/lib/dates/values.ts",
     "src/lib/dates/calendar.test.ts",
+    "src/lib/calendar/month-grid.ts",
+    "src/lib/calendar/month-grid.test.ts",
+    "src/lib/calendar/holidays.ts",
+    "src/lib/calendar/holidays.test.ts",
+    "src/lib/calendar/zodiac.ts",
+    "src/lib/calendar/zodiac.test.ts",
     "src/lib/profile/calendar.ts",
     "src/lib/profile/save-calendar.ts",
-    "src/lib/profile/save-calendar.test.ts"
+    "src/lib/profile/save-calendar.test.ts",
+    "src/lib/profile/save-calendar-settings.ts",
+    "src/lib/profile/save-calendar-settings.test.ts"
   ]
 }

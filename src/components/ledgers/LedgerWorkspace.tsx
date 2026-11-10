@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Alert } from "@/components/ui/Alert";
 import { Button } from "@/components/ui/Button";
@@ -16,6 +16,7 @@ import {
   isLedgerCurrency,
   type Ledger,
 } from "@/lib/ledgers/constants";
+import { rememberLastOpenedLedger } from "@/lib/ledgers/last-opened";
 
 export type LedgerTab = "records" | "contacts" | "summary";
 
@@ -42,6 +43,10 @@ export function LedgerWorkspace({
   const defaultCurrency = isLedgerCurrency(ledger.default_currency)
     ? ledger.default_currency
     : "TJS";
+
+  useEffect(() => {
+    rememberLastOpenedLedger(ledger.id);
+  }, [ledger.id]);
 
   if (data.loading) {
     return (

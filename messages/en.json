@@ -19,6 +19,11 @@
     "name": "Arya",
     "tagline": "My ledger"
   },
+  "nav": {
+    "label": "Main sections",
+    "ledgers": "Ledgers",
+    "calendar": "Calendar"
+  },
   "common": {
     "loading": "Please wait…",
     "language": "Language",
@@ -105,7 +110,98 @@
     "previousMonth": "Previous month",
     "nextMonth": "Next month",
     "openPicker": "Open calendar",
-    "dateHint": "Calendar: {calendar}. Format: year/month/day; Persian digits are also accepted."
+    "dateHint": "Calendar: {calendar}. Format: year/month/day; Persian digits are also accepted.",
+    "page": {
+      "eyebrow": "Calendar",
+      "title": "Calendar",
+      "subtitle": "See today, the month, and occasions in one place.",
+      "settingsLink": "Calendar settings",
+      "quickCalendar": "Display calendar",
+      "savingCalendar": "Saving…",
+      "calendarSaved": "Display calendar saved.",
+      "calendarSaveError": "We couldn't save the display calendar. Please try again.",
+      "loadingMonth": "Loading month…",
+      "loadError": "We couldn't load the calendar.",
+      "retry": "Try again",
+      "selectedDay": "Selected day",
+      "holidaysTitle": "Occasions",
+      "noHolidays": "No occasion is recorded for this day.",
+      "holidaysLoadError": "We couldn't load the occasions.",
+      "unverified": "Being matched with the official source",
+      "source": "Source",
+      "moonSighting": "Depends on moon sighting",
+      "moonSightingLink": "Adjust the Hijri day",
+      "ledgerLabel": "Ledger",
+      "noLedgerTitle": "No ledgers yet",
+      "noLedgerDescription": "Create a ledger first to connect financial records to the calendar.",
+      "goToLedgers": "Go to ledgers",
+      "ledgersLoadError": "We couldn't load your ledgers.",
+      "transactionsTitle": "Records for this day",
+      "noTransactions": "No record is saved for this day.",
+      "newTransaction": "New record for this day",
+      "transactionCount": "{count} records",
+      "monthlyLoadError": "We couldn't load this month's records.",
+      "noContact": "No contact"
+    },
+    "holidaySets": {
+      "aryan": "Aryan culture",
+      "khorasan": "Khorasan",
+      "iran": "Iran",
+      "tajikistan": "Tajikistan",
+      "shia": "Shia religious",
+      "sunni": "Sunni religious",
+      "islamic": "Islamic (shared)"
+    },
+    "holidayCategory": {
+      "cultural": "Cultural",
+      "official": "Official",
+      "religious": "Religious"
+    },
+    "zodiac": {
+      "todayTitle": "Today's zodiac sign",
+      "birthTitle": "Your birth zodiac sign",
+      "entertainment": "For entertainment only.",
+      "addBirthDate": "Add your birth date in calendar settings to see your birth zodiac sign.",
+      "settingsLink": "Set birth date",
+      "names": {
+        "aries": { "fa": "حمل", "en": "Aries" },
+        "taurus": { "fa": "ثور", "en": "Taurus" },
+        "gemini": { "fa": "جوزا", "en": "Gemini" },
+        "cancer": { "fa": "سرطان", "en": "Cancer" },
+        "leo": { "fa": "اسد", "en": "Leo" },
+        "virgo": { "fa": "سنبله", "en": "Virgo" },
+        "libra": { "fa": "میزان", "en": "Libra" },
+        "scorpio": { "fa": "عقرب", "en": "Scorpio" },
+        "sagittarius": { "fa": "قوس", "en": "Sagittarius" },
+        "capricorn": { "fa": "جدی", "en": "Capricorn" },
+        "aquarius": { "fa": "دلو", "en": "Aquarius" },
+        "pisces": { "fa": "حوت", "en": "Pisces" }
+      }
+    },
+    "settings": {
+      "eyebrow": "Calendar",
+      "title": "Calendar settings",
+      "subtitle": "Set the display calendar, Hijri adjustment, occasions, and birth date.",
+      "back": "Back to calendar",
+      "calendarTitle": "Display calendar",
+      "calendarDescription": "Dates are always stored in Gregorian format in the database; this choice only changes display and input.",
+      "calendarHint": "Language only suggests a default calendar; any language and calendar combination can be saved.",
+      "hijriOffsetTitle": "Hijri day adjustment",
+      "hijriOffsetDescription": "Moon sighting varies by country. If the Hijri date differs by a day or two from your local calendar, adjust it here.",
+      "holidaySetsTitle": "Occasion sets",
+      "holidaySetsDescription": "Only the sets you turn on appear in the calendar.",
+      "holidaySetsHint": "The default follows your account region; you can change it at any time.",
+      "birthDateTitle": "Birth date",
+      "birthDateDescription": "Optional; only used to show your birth zodiac sign. For entertainment only.",
+      "birthDateClear": "Clear birth date",
+      "preview": "Preview",
+      "save": "Save settings",
+      "saving": "Saving…",
+      "saved": "Calendar settings saved.",
+      "errors": {
+        "generic": "We couldn't save the calendar settings. Please try again."
+      }
+    }
   },
   "settings": {
     "open": "Settings",

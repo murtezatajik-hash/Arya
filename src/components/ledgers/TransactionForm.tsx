@@ -35,6 +35,7 @@ type TransactionFormProps = {
   defaultCurrency: LedgerCurrency;
   contacts: Contact[];
   transaction?: LedgerTransaction | null;
+  initialDate?: string;
   onSave: (input: TransactionInput, id?: string) => Promise<boolean>;
   onCreateContact: (input: ContactInput) => Promise<Contact | null>;
   onCancel: () => void;
@@ -48,6 +49,7 @@ export function TransactionForm({
   defaultCurrency,
   contacts,
   transaction,
+  initialDate,
   onSave,
   onCreateContact,
   onCancel,
@@ -73,7 +75,7 @@ export function TransactionForm({
   const [currency, setCurrency] =
     useState<LedgerCurrency>(initialCurrency);
   const [occurredOn, setOccurredOn] = useState<string | null>(
-    transaction?.occurred_on ?? todayIso(),
+    transaction?.occurred_on ?? initialDate ?? todayIso(),
   );
   const [contactId, setContactId] = useState(
     transaction?.contact_id ?? "",

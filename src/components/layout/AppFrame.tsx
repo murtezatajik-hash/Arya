@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Brand } from "@/components/brand/Brand";
 import { SignOutButton } from "@/components/dashboard/SignOutButton";
 import { LocaleSwitcher } from "@/components/layout/LocaleSwitcher";
+import { MainNav } from "@/components/layout/MainNav";
 import { Link } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
 
@@ -14,14 +15,14 @@ export async function AppFrame({ children, locale }: AppFrameProps) {
   const t = await getTranslations("settings");
 
   return (
-    <div className="relative flex min-h-dvh flex-col overflow-hidden">
+    <div className="relative flex min-h-dvh flex-col overflow-x-hidden">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0">
         <div className="absolute -top-56 left-1/2 size-[38rem] -translate-x-1/2 rounded-full bg-accent/10 blur-3xl" />
         <div className="absolute -bottom-64 right-0 size-[30rem] rounded-full bg-accent-strong/5 blur-3xl" />
       </div>
 
       <header className="relative z-10 border-b border-line/60 bg-canvas/50 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-3xl items-center justify-between gap-3 px-5 py-4 sm:px-8">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between gap-3 px-5 py-4 sm:px-8">
           <Brand />
           <div className="flex items-center gap-2">
             <Link
@@ -51,17 +52,29 @@ export async function AppFrame({ children, locale }: AppFrameProps) {
         </div>
       </header>
 
-      <main className="relative z-10 mx-auto w-full max-w-3xl flex-1 px-5 pb-10 pt-8 sm:px-8 sm:pt-12">
-        {children}
-      </main>
-
-      <footer className="relative z-10 mx-auto w-full max-w-3xl px-5 pb-8 sm:px-8">
-        <div className="flex justify-end border-t border-line/60 pt-5">
-          <div className="w-full sm:w-auto">
-            <SignOutButton locale={locale} />
+      <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-1 gap-6 px-5 sm:px-8">
+        <aside className="hidden w-48 shrink-0 py-8 lg:block">
+          <div className="sticky top-8">
+            <MainNav variant="side" />
           </div>
+        </aside>
+
+        <div className="flex min-w-0 flex-1 flex-col">
+          <main className="w-full flex-1 pb-28 pt-8 sm:pt-12 lg:pb-10">
+            {children}
+          </main>
+
+          <footer className="w-full pb-28 lg:pb-8">
+            <div className="flex justify-end border-t border-line/60 pt-5">
+              <div className="w-full sm:w-auto">
+                <SignOutButton locale={locale} />
+              </div>
+            </div>
+          </footer>
         </div>
-      </footer>
+      </div>
+
+      <MainNav variant="bottom" />
     </div>
   );
 }

@@ -19,6 +19,11 @@
     "name": "آریا",
     "tagline": "دفتر حساب من"
   },
+  "nav": {
+    "label": "بخش‌های اصلی",
+    "ledgers": "دفترها",
+    "calendar": "گاه‌شمار"
+  },
   "common": {
     "loading": "لطفاً صبر کنید…",
     "language": "زبان",
@@ -105,7 +110,98 @@
     "previousMonth": "ماه قبل",
     "nextMonth": "ماه بعد",
     "openPicker": "باز کردن گاه‌شمار",
-    "dateHint": "گاه‌شمار {calendar}؛ قالب سال/ماه/روز است و رقم‌های فارسی هم پذیرفته می‌شود."
+    "dateHint": "گاه‌شمار {calendar}؛ قالب سال/ماه/روز است و رقم‌های فارسی هم پذیرفته می‌شود.",
+    "page": {
+      "eyebrow": "گاه‌شمار",
+      "title": "گاه‌شمار",
+      "subtitle": "امروز، ماه و مناسبت‌ها را یک‌جا ببینید.",
+      "settingsLink": "تنظیمات گاه‌شمار",
+      "quickCalendar": "تقویم نمایش",
+      "savingCalendar": "در حال ذخیره…",
+      "calendarSaved": "تقویم نمایش ذخیره شد.",
+      "calendarSaveError": "تقویم نمایش ذخیره نشد. دوباره تلاش کنید.",
+      "loadingMonth": "در حال بارگذاری ماه…",
+      "loadError": "گاه‌شمار بارگذاری نشد.",
+      "retry": "تلاش دوباره",
+      "selectedDay": "روز انتخاب‌شده",
+      "holidaysTitle": "مناسبت‌ها",
+      "noHolidays": "برای این روز مناسبتی ثبت نشده است.",
+      "holidaysLoadError": "مناسبت‌ها بارگذاری نشدند.",
+      "unverified": "در حال تطبیق با منبع رسمی",
+      "source": "منبع",
+      "moonSighting": "بسته به رؤیت هلال",
+      "moonSightingLink": "تنظیم اصلاح روز",
+      "ledgerLabel": "دفتر حساب",
+      "noLedgerTitle": "هنوز دفتری ندارید",
+      "noLedgerDescription": "برای پیوند ثبت‌های مالی با گاه‌شمار، نخست یک دفتر بسازید.",
+      "goToLedgers": "رفتن به دفترها",
+      "ledgersLoadError": "دفترها بارگذاری نشدند.",
+      "transactionsTitle": "ثبت‌های این روز",
+      "noTransactions": "برای این روز ثبتی ثبت نشده است.",
+      "newTransaction": "ثبت تازه در این روز",
+      "transactionCount": "{count} ثبت",
+      "monthlyLoadError": "ثبت‌های این ماه بارگذاری نشدند.",
+      "noContact": "بدون شخص"
+    },
+    "holidaySets": {
+      "aryan": "فرهنگ آریایی",
+      "khorasan": "خراسان",
+      "iran": "ایران",
+      "tajikistan": "تاجیکستان",
+      "shia": "مذهبی شیعه",
+      "sunni": "مذهبی اهل سنت",
+      "islamic": "اسلامی (مشترک)"
+    },
+    "holidayCategory": {
+      "cultural": "فرهنگی",
+      "official": "رسمی",
+      "religious": "مذهبی"
+    },
+    "zodiac": {
+      "todayTitle": "برج امروز",
+      "birthTitle": "برج تولد شما",
+      "entertainment": "جنبه سرگرمی دارد.",
+      "addBirthDate": "برای دیدن برج تولد، تاریخ تولد را در تنظیمات گاه‌شمار وارد کنید.",
+      "settingsLink": "تنظیم تاریخ تولد",
+      "names": {
+        "aries": { "fa": "حمل", "en": "Aries" },
+        "taurus": { "fa": "ثور", "en": "Taurus" },
+        "gemini": { "fa": "جوزا", "en": "Gemini" },
+        "cancer": { "fa": "سرطان", "en": "Cancer" },
+        "leo": { "fa": "اسد", "en": "Leo" },
+        "virgo": { "fa": "سنبله", "en": "Virgo" },
+        "libra": { "fa": "میزان", "en": "Libra" },
+        "scorpio": { "fa": "عقرب", "en": "Scorpio" },
+        "sagittarius": { "fa": "قوس", "en": "Sagittarius" },
+        "capricorn": { "fa": "جدی", "en": "Capricorn" },
+        "aquarius": { "fa": "دلو", "en": "Aquarius" },
+        "pisces": { "fa": "حوت", "en": "Pisces" }
+      }
+    },
+    "settings": {
+      "eyebrow": "گاه‌شمار",
+      "title": "تنظیمات گاه‌شمار",
+      "subtitle": "تقویم نمایش، اصلاح قمری، مناسبت‌ها و تاریخ تولد را اینجا تنظیم کنید.",
+      "back": "بازگشت به گاه‌شمار",
+      "calendarTitle": "تقویم نمایش",
+      "calendarDescription": "تاریخ‌ها همیشه میلادی در پایگاه داده ذخیره می‌شوند؛ این انتخاب فقط نمایش و ورود تاریخ را تغییر می‌دهد.",
+      "calendarHint": "زبان فقط تقویم پیشنهادی را تعیین می‌کند؛ هر ترکیبی از زبان و تقویم را می‌توانید ذخیره کنید.",
+      "hijriOffsetTitle": "اصلاح روز قمری",
+      "hijriOffsetDescription": "رؤیت هلال در کشورها متفاوت است. اگر تاریخ قمری با تقویم محلی شما یک یا دو روز اختلاف دارد، اینجا اصلاح کنید.",
+      "holidaySetsTitle": "مجموعه‌های مناسبت",
+      "holidaySetsDescription": "فقط مجموعه‌هایی که روشن می‌کنید در گاه‌شمار دیده می‌شوند.",
+      "holidaySetsHint": "پیش‌فرض بر اساس منطقه حساب شماست؛ هر زمان می‌توانید آن را تغییر دهید.",
+      "birthDateTitle": "تاریخ تولد",
+      "birthDateDescription": "اختیاری؛ فقط برای نمایش برج تولد. جنبه سرگرمی دارد.",
+      "birthDateClear": "پاک کردن تاریخ تولد",
+      "preview": "نمایش نمونه",
+      "save": "ذخیره تنظیمات",
+      "saving": "در حال ذخیره…",
+      "saved": "تنظیمات گاه‌شمار ذخیره شد.",
+      "errors": {
+        "generic": "تنظیمات گاه‌شمار ذخیره نشد. دوباره تلاش کنید."
+      }
+    }
   },
   "settings": {
     "open": "تنظیمات",
